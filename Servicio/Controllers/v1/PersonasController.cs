@@ -15,52 +15,89 @@ namespace Servicio.Controllers.v1
         public PersonasController(ApplicationDbContext context)
         {
             _context = context;
-        }       
+        }
 
         [HttpGet]
         public async Task<List<Persona>> GetPersona()
         {
-            var personas = await _context.Personas.ToListAsync();
+            var personas = await _context.Personas
+                .Include(p => p.Genero) // Incluye la entidad Genero relacionada
+                .ToListAsync();
             return personas;
         }
 
         [HttpGet("{id}")]
-        public async Task<Persona> GetPersona(int id)
+        public async Task<ActionResult<Persona>> GetPersona(int id)
         {
-            var persona = await _context.Personas.Where(p => p.Id == id).FirstOrDefaultAsync();
+            var persona = await _context.Personas
+                .Where(p => p.Id == id)
+                .Include(p => p.Genero) 
+                .FirstOrDefaultAsync();
+
+            if (persona == null)
+            {
+                return NotFound($"no existe persona con id {id}");
+            }
             return persona;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> PostPersona([FromBody] Persona persona)
+        {
+            try
+            {
+                if (persona == null)
+                {
+                    return BadRequest("Persona no puede ser nulo");
+                }
+                _context.Personas.Add(persona);
+                await _context.SaveChangesAsync();
 
-        //[HttpGet]
-        //public List<Persona> GetPersona()
-        //{
-        //    List<Persona> personas = new List<Persona>();
-        //    for (int i = 0; i < 10; i++)
-        //    {
-        //        Persona persona = new Persona()
-        //        {
-        //            Id = i +1,
-        //            Paterno = $"Miranda {i}",
-        //            Materno = $"Luna {i}",
-        //            Nombres = $"Jose {i}"
-        //        };
-        //        personas.Add(persona);
-        //    }
-        //    return personas;
-        //}
+                return CreatedAtAction(nameof(GetPersona), new { id = persona.Id }, persona);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }           
+        }
 
-        //[HttpGet("{id}")]
-        //public Persona GetPersona(int id)
-        //{
-        //    Persona persona = new Persona()
-        //    {
-        //        Id = 2,
-        //        Paterno = "CANDIA",
-        //        Materno = "CHACMANA",
-        //        Nombres = "Melisa"
-        //    };
-        //    return persona;
-        //}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutPersona(int id, [FromBody] Persona persona)
+        {
+            if (id != persona.Id)
+            {
+                return BadRequest("El ID de la persona no coincide con el ID en la URL.");
+            }
+            _context.Entry(persona).State = EntityState.Modified;
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                
+            }
+            return NoContent();
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePersona(int id)
+        {
+            var persona = await _context.Personas.FindAsync(id);
+            if (persona == null)
+            {
+                return NotFound($"No existe persona con id {id}");
+            }
+            _context.Personas.Remove(persona);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+
+        private bool PersonaExists(int id)
+        {
+            return _context.Personas.Any(e => e.Id == id);
+        }        
     }
 }

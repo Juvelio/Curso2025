@@ -10,5 +10,6 @@ namespace Servicio.Data
         }
 
         public DbSet<Persona> Personas { get; set; }
+        public DbSet<Genero> Genero { get; set; }
     }
 }
