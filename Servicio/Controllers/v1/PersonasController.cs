@@ -17,19 +17,19 @@ namespace Servicio.Controllers.v1
             _context = context;
         }       
 
-        [HttpGet]
-        public async Task<List<Persona>> GetPersona()
-        {
-            var personas = await _context.Personas.ToListAsync();
-            return personas;
-        }
+        //[HttpGet]
+        //public async Task<List<Persona>> GetPersona()
+        //{
+        //    var personas = await _context.Personas.ToListAsync();
+        //    return personas;
+        //}
 
-        [HttpGet("{id}")]
-        public async Task<Persona> GetPersona(int id)
-        {
-            var persona = await _context.Personas.Where(p => p.Id == id).FirstOrDefaultAsync();
-            return persona;
-        }
+        //[HttpGet("{id}")]
+        //public async Task<Persona> GetPersona(int id)
+        //{
+        //    var persona = await _context.Personas.Where(p => p.Id == id).FirstOrDefaultAsync();
+        //    return persona;
+        //}
 
 
         //[HttpGet]

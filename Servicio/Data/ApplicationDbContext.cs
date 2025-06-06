@@ -9,6 +9,17 @@ namespace Servicio.Data
         {
         }
 
-        public DbSet<Persona> Personas { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
+        //public DbSet<Persona> Personas { get; set; }
+        public DbSet<Ciudadano> Ciudadanos { get; set; }
+        public DbSet<Policia> Policias { get; set; }
+        public DbSet<Grado> Grados { get; set; }
+        public DbSet<TipoIncidente> TiposIncidente { get; set; }
+        public DbSet<Incidente> Incidentes { get; set; }
+        public DbSet<Intervencion> Intervenciones { get; set; }
     }
 }
