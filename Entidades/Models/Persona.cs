@@ -20,6 +20,7 @@ namespace Entidades.Models
     //     public string Materno { get; set; }
     // }
 
+
   
 
     public abstract class Persona
