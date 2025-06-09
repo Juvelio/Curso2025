@@ -2,6 +2,7 @@
 using AutoMapper;
 using Entidades.DTOs;
 using Entidades.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Servicio.Data;
@@ -10,6 +11,7 @@ namespace Servicio.Controllers.v1
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize]
     public class PersonasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +24,7 @@ namespace Servicio.Controllers.v1
         }
 
         [HttpGet]
+        [Authorize(Roles ="admin")]
         public async Task<List<PersonaDTO>> GetPersona()
         {
             var personas = await _context.Personas
@@ -34,6 +37,7 @@ namespace Servicio.Controllers.v1
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<PersonaDTO>> GetPersona(int id)
         {
             var persona = await _context.Personas
@@ -52,6 +56,7 @@ namespace Servicio.Controllers.v1
         }
 
         [HttpPost]
+        [Authorize(Roles ="admin")]
         public async Task<IActionResult> PostPersona([FromBody] Persona persona)
         {
             try
@@ -71,9 +76,45 @@ namespace Servicio.Controllers.v1
             }           
         }
 
-       
+        //[HttpPost("masivo")]
+        //public async Task<IActionResult> PostPersonaMasivo()
+        //{
+        //    try
+        //    {
+        //        List<Persona> personas = new List<Persona>();
+
+        //        for (int i = 0; i < 1000; i++)
+        //        {
+        //            var persona = new Persona
+        //            {
+        //                Nombres = $"Nombre {i}",
+        //                Paterno = $"Paterno {i}",
+        //                Materno = $"Materno {i}",
+        //                Direccion = $"Direccion {i}",
+        //                Telefono = $"Telefono {i}",
+                        
+                        
+        //            };
+        //            personas.Add(persona);
+        //        }
+                
+        //        _context.Personas.AddRange(personas);
+
+
+
+
+        //        await _context.SaveChangesAsync();
+
+        //        return NoContent();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
 
         [HttpPut("{id}")]
+
         public async Task<IActionResult> PutPersona(int id, [FromBody] Persona persona)
         {
             if (id != persona.Id)
