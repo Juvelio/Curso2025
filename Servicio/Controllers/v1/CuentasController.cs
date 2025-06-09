@@ -42,7 +42,6 @@ namespace Servicio.Controllers.v1
         {
             // CREAMOS EL HEADER
             var _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:ClaveSecreta"]));
-
             var _signingCredentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
             var _header = new JwtHeader(_signingCredentials);
 
