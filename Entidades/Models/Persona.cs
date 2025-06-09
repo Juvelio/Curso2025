@@ -19,6 +19,17 @@ namespace Entidades.Models
         [Required, StringLength(50)]
         public string Materno { get; set; }
 
+
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
+        public string Usuario { get; set; }
+        public string Pass { get; set; }
+        [Column("CORREO_ELECTRONICO")]
+        public string Email { get; set; }
+
+
+
+
         [ForeignKey(nameof(Genero))]
         public int GeneroId { get; set; }
         public Genero Genero { get; set; }

@@ -1,4 +1,6 @@
 ﻿
+using AutoMapper;
+using Entidades.DTOs;
 using Entidades.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,34 +13,42 @@ namespace Servicio.Controllers.v1
     public class PersonasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public PersonasController(ApplicationDbContext context)
+        public PersonasController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<List<Persona>> GetPersona()
+        public async Task<List<PersonaDTO>> GetPersona()
         {
             var personas = await _context.Personas
                 .Include(p => p.Genero) // Incluye la entidad Genero relacionada
                 .ToListAsync();
-            return personas;
+
+            var personasDTO = _mapper.Map<List<PersonaDTO>>(personas);
+
+            return personasDTO;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Persona>> GetPersona(int id)
+        public async Task<ActionResult<PersonaDTO>> GetPersona(int id)
         {
             var persona = await _context.Personas
-                .Where(p => p.Id == id)
-                .Include(p => p.Genero) 
+                .Where(p => p.Id == id)                
+                .Include(p => p.Genero)                 
                 .FirstOrDefaultAsync();
 
             if (persona == null)
             {
                 return NotFound($"no existe persona con id {id}");
             }
-            return persona;
+            // Mapear la entidad Persona a PersonaDTO usando AutoMapper
+            var personaDTO = _mapper.Map<PersonaDTO>(persona);
+
+            return personaDTO;
         }
 
         [HttpPost]
@@ -60,6 +70,8 @@ namespace Servicio.Controllers.v1
                 return BadRequest(ex.Message);
             }           
         }
+
+       
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPersona(int id, [FromBody] Persona persona)
