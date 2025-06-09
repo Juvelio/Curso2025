@@ -9,11 +9,13 @@ using Entidades.Models;
 using Servicio.Data;
 using AutoMapper;
 using Entidades.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Servicio.Controllers.v1
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class PoliciasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
