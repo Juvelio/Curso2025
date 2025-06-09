@@ -25,6 +25,8 @@ namespace Entidades.Models
 
     public abstract class Persona
     {
+        [Required]
+        public int DNI { get; set; }
         [Required, MaxLength(50)]
         public string Paterno { get; set; }
 
@@ -32,7 +34,7 @@ namespace Entidades.Models
         public string Materno { get; set; }
 
         [Required, MaxLength(100)]
-        public string Nombres { get; set; }
+        public string Nombres { get; set; }       
     }
 
     public class Ciudadano : Persona
@@ -51,8 +53,9 @@ namespace Entidades.Models
 
     public class Policia : Persona
     {
-        [Key, Required, MaxLength(10)]
-        public int Id { get; set; }
+        [Key, Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int CIP { get; set; }
 
         [Required, MaxLength(100)]
         public string Comisaria { get; set; }
@@ -67,7 +70,9 @@ namespace Entidades.Models
     public class Grado
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; }        
+        [Required, MaxLength(10)]
+        public string Abreviatura { get; set; }
         [Required, MaxLength(50)]
         public string Descripcion { get; set; }
     }
@@ -89,23 +94,23 @@ namespace Entidades.Models
         [Key]
         public int Id { get; set; }
 
-        public DateTime FechaHora { get; set; }
+        public DateTime Fecha { get; set; }
 
         [Required]
         public string Descripcion { get; set; }
 
-        [Required]
-        public string DireccionHecho { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
 
         // FK a Ciudadano
         [ForeignKey(nameof(Ciudadano))]
         public int CiudadanoId { get; set; }
         public Ciudadano Ciudadano { get; set; }
 
-        // FK a TipoDelito
-        [ForeignKey(nameof(TipoDelito))]
-        public int TipoDelitoId { get; set; }
-        public TipoIncidente TipoDelito { get; set; }
+        // FK a TipoIncidente
+        [ForeignKey(nameof(TipoIncidente))]
+        public int TipoIncidenteId { get; set; }
+        public TipoIncidente TipoIncidente { get; set; }
 
         public ICollection<Intervencion> Intervenciones { get; set; }
     }
@@ -115,9 +120,9 @@ namespace Entidades.Models
         [Key]
         public int IntervencionId { get; set; }
 
-        public DateTime FechaIntervencion { get; set; }
+        public DateTime Fecha { get; set; }
 
-        public string DetalleIntervencion { get; set; }
+        public string Detalle { get; set; }
 
         // FK a Incidente
         [ForeignKey(nameof(Incidente))]
@@ -126,7 +131,7 @@ namespace Entidades.Models
 
         // FK a PoliciaPNP
         [ForeignKey(nameof(Policia))]
-        public int PoliciaId { get; set; }
+        public int CIP { get; set; }
         public Policia Policia { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entidades.Models;
 using Servicio.Data;
+using AutoMapper;
+using Entidades.DTOs;
 
 namespace Servicio.Controllers.v1
 {
@@ -15,24 +17,33 @@ namespace Servicio.Controllers.v1
     public class PoliciasController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public PoliciasController(ApplicationDbContext context)
+        public PoliciasController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Policias
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Policia>>> GetPolicias()
+        public async Task<ActionResult<IEnumerable<PoliciaDTO>>> GetPolicias()
         {
-            return await _context.Policias.ToListAsync();
+            var policias = await _context.Policias
+                .Include(p => p.Grado)
+                .ToListAsync();
+
+            return _mapper.Map<List<PoliciaDTO>>(policias);
         }
 
         // GET: api/Policias/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Policia>> GetPolicia(int id)
+        [HttpGet("{CIP}")]
+        public async Task<ActionResult<Policia>> GetPolicia(int CIP)
         {
-            var policia = await _context.Policias.FindAsync(id);
+            var policia = await _context.Policias
+                .Include(p => p.Grado)
+                .Where(x => x.CIP == CIP)
+                .FirstOrDefaultAsync();
 
             if (policia == null)
             {
@@ -44,10 +55,10 @@ namespace Servicio.Controllers.v1
 
         // PUT: api/Policias/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPolicia(int id, Policia policia)
+        [HttpPut("{CIP}")]
+        public async Task<IActionResult> PutPolicia(int CIP, Policia policia)
         {
-            if (id != policia.Id)
+            if (CIP != policia.CIP)
             {
                 return BadRequest();
             }
@@ -60,7 +71,7 @@ namespace Servicio.Controllers.v1
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PoliciaExists(id))
+                if (!PoliciaExists(CIP))
                 {
                     return NotFound();
                 }
@@ -76,19 +87,20 @@ namespace Servicio.Controllers.v1
         // POST: api/Policias
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Policia>> PostPolicia(Policia policia)
+        public async Task<ActionResult<Policia>> PostPolicia(PoliciaCrearDTO policiaCrear)
         {
+            var policia = _mapper.Map<Policia>(policiaCrear);
             _context.Policias.Add(policia);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPolicia", new { id = policia.Id }, policia);
+            return CreatedAtAction("GetPolicia", new { CIP = policia.CIP }, policia);
         }
 
         // DELETE: api/Policias/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePolicia(int id)
+        [HttpDelete("{CIP}")]
+        public async Task<IActionResult> DeletePolicia(int CIP)
         {
-            var policia = await _context.Policias.FindAsync(id);
+            var policia = await _context.Policias.FindAsync(CIP);
             if (policia == null)
             {
                 return NotFound();
@@ -100,9 +112,9 @@ namespace Servicio.Controllers.v1
             return NoContent();
         }
 
-        private bool PoliciaExists(int id)
+        private bool PoliciaExists(int CIP)
         {
-            return _context.Policias.Any(e => e.Id == id);
+            return _context.Policias.Any(e => e.CIP == CIP);
         }
     }
 }

@@ -3,6 +3,11 @@ using Servicio.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//AUTOMAPPER
+builder.Services.AddAutoMapper(typeof(Program));
+//// Configure AutoMapper
+//builder.Services.AddAutoMapper(typeof(Program)); // Register AutoMapper
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("CadenaConexion")));
 
