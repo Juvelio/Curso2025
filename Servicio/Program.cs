@@ -36,7 +36,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Cors", policy =>
     {
-        policy.WithOrigins("https://miapp.com", "http://localhost:4200") // ? Dominios permitidos
+        policy.WithOrigins("https://miapp.com", "https://localhost:7057", "https://localhost:7027") // ? Dominios permitidos
               .AllowAnyMethod()
               .AllowAnyHeader();
     });

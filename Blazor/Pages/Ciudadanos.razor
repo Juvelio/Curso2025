@@ -1,0 +1,166 @@
+﻿@page "/ciudadanos"
+@using Blazor.Services
+@using Entidades.Models
+
+@inject CiudadanoService CiudadanoService
+@inject GeneroService GeneroService
+
+<h3 class="mb-4">Ciudadanos</h3>
+
+@if (ciudadanos == null || generos == null)
+{
+    <div class="alert alert-info">Cargando datos...</div>
+}
+else
+{
+    <button class="btn btn-success mb-3" @onclick="Nuevo">Agregar persona</button>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Paterno</th>
+                <th>Materno</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Género</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in ciudadanos)
+            {
+                var generoNombre = generos.FirstOrDefault(g => g.Id == p.GeneroId)?.Descripcion;
+                <tr>
+                    <td>@p.Nombres</td>
+                    <td>@p.Paterno</td>
+                    <td>@p.Materno</td>
+                    <td>@p.Telefono</td>
+                    <td>@p.Direccion</td>
+                    <td>@generoNombre</td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-primary" @onclick="() => Editar(p)">Editar</button>
+                            <button class="btn btn-sm btn-danger" @onclick="() => Eliminar(p.Id)">Eliminar</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (mostrarFormulario)
+    {
+        <div class="card mt-4">
+            <div class="card-header">
+                <strong>@(ciudadano.Id == 0 ? "Agregar Persona" : "Editar Persona")</strong>
+            </div>
+            <div class="card-body">
+                <EditForm Model="@ciudadano" OnValidSubmit="Guardar">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Nombres</label>
+                            <InputText class="form-control" @bind-Value="ciudadano.Nombres" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Paterno</label>
+                            <InputText class="form-control" @bind-Value="ciudadano.Paterno" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Materno</label>
+                            <InputText class="form-control" @bind-Value="ciudadano.Materno" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Teléfono</label>
+                            <InputText class="form-control" @bind-Value="ciudadano.Telefono" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Dirección</label>
+                            <InputText class="form-control" @bind-Value="ciudadano.Direccion" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Género</label>
+                            <InputSelect class="form-select" @bind-Value="ciudadano.GeneroId">
+                                <option disabled value="">-- Seleccionar --</option>
+                                @foreach (var genero in generos)
+                                {
+                                    <option value="@genero.Id">@genero.Descripcion</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                        <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    }
+}
+
+
+
+@code {
+    List<Ciudadano> ciudadanos;
+    List<Genero> generos;
+    Ciudadano ciudadano = new();
+    bool mostrarFormulario = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+
+    async Task Cargar()
+    {
+        ciudadanos = await CiudadanoService.ObtenerPersonasAsync();
+        generos = await GeneroService.ObtenerGenerosAsync();
+    }
+
+    void Nuevo()
+    {
+        ciudadano = new();
+        mostrarFormulario = true;
+    }
+
+    void Editar(Ciudadano p)
+    {
+        ciudadano = new Ciudadano
+            {
+                Id = p.Id,
+                Nombres = p.Nombres,
+                Paterno = p.Paterno,
+                Materno = p.Materno,
+                Telefono = p.Telefono,
+                Direccion = p.Direccion,
+                GeneroId = p.GeneroId
+            };
+        mostrarFormulario = true;
+    }
+
+    async Task Eliminar(int id)
+    {
+        await CiudadanoService.EliminarAsync(id);
+        await Cargar();
+    }
+
+    async Task Guardar()
+    {
+        if (ciudadano.Id == 0)
+            await CiudadanoService.CrearAsync(ciudadano);
+        else
+            await CiudadanoService.ActualizarAsync(ciudadano);
+
+        ciudadano = new();
+        mostrarFormulario = false;
+        await Cargar();
+    }
+
+    void Cancelar()
+    {
+        ciudadano = new();
+        mostrarFormulario = false;
+    }
+}
