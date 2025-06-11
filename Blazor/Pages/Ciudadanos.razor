@@ -1,0 +1,69 @@
+﻿@page "/ciudadanos"
+@using Blazor.Services
+@using Entidades.Models
+@inject CiudadanoService CiudadanoService
+@inject GeneroService GeneroService
+
+<h3>Ciudadanos</h3>
+
+
+@if(ciudadanos == null || generos == null)
+{
+    <p>Cargando...</p>
+}
+else if (ciudadanos.Count == 0)
+{
+    <p>No hay ciudadanos registrados.</p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Paterno</th>
+                <th>Materno</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Género</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ciudadano in ciudadanos)
+            {
+                <tr>
+                    <td>@ciudadano.Nombres</td>
+                    <td>@ciudadano.Paterno</td>
+                    <td>@ciudadano.Materno</td>
+                    <td>@ciudadano.Telefono</td>
+                    <td>@ciudadano.Direccion</td>
+                    <td>@ciudadano.Genero?.Descripcion</td>
+                    <td>
+                        <button class="btn btn-primary">Editar</button>
+                        <button class="btn btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Ciudadano> ciudadanos;
+    List<Genero> generos;
+    Ciudadano ciudadano = new Ciudadano();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+
+    async Task Cargar()
+    {
+        ciudadanos = await CiudadanoService.ObtenerCiudadanosAsync();
+        generos = await GeneroService.ObtenerGenerosAsync();
+    }
+}
