@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using api.denuncia.Data;
+using Servicio.Data;
 
 #nullable disable
 
-namespace api.denuncia.Migrations
+namespace Servicio.Migrations
 {
-    [DbContext(typeof(apidenunciaContext))]
-    [Migration("20250610161929_v1")]
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20250611130639_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -20,12 +20,12 @@ namespace api.denuncia.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("api.denuncia.Models.Ciudadano", b =>
+            modelBuilder.Entity("Entidades.Models.Ciudadano", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -40,6 +40,9 @@ namespace api.denuncia.Migrations
                     b.Property<string>("Direccion")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("GeneroId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Materno")
                         .IsRequired()
@@ -62,10 +65,28 @@ namespace api.denuncia.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GeneroId");
+
                     b.ToTable("Ciudadanos");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Grado", b =>
+            modelBuilder.Entity("Entidades.Models.Genero", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genero");
+                });
+
+            modelBuilder.Entity("Entidades.Models.Grado", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,7 +109,7 @@ namespace api.denuncia.Migrations
                     b.ToTable("Grados");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Incidente", b =>
+            modelBuilder.Entity("Entidades.Models.Incidente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +145,7 @@ namespace api.denuncia.Migrations
                     b.ToTable("Incidentes");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Intervencion", b =>
+            modelBuilder.Entity("Entidades.Models.Intervencion", b =>
                 {
                     b.Property<int>("IntervencionId")
                         .ValueGeneratedOnAdd()
@@ -153,7 +174,7 @@ namespace api.denuncia.Migrations
                     b.ToTable("Intervenciones");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Policia", b =>
+            modelBuilder.Entity("Entidades.Models.Policia", b =>
                 {
                     b.Property<int>("CIP")
                         .HasColumnType("int");
@@ -191,7 +212,7 @@ namespace api.denuncia.Migrations
                     b.ToTable("Policias");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.TipoIncidente", b =>
+            modelBuilder.Entity("Entidades.Models.TipoIncidente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -209,15 +230,26 @@ namespace api.denuncia.Migrations
                     b.ToTable("TiposIncidente");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Incidente", b =>
+            modelBuilder.Entity("Entidades.Models.Ciudadano", b =>
                 {
-                    b.HasOne("api.denuncia.Models.Ciudadano", "Ciudadano")
+                    b.HasOne("Entidades.Models.Genero", "Genero")
+                        .WithMany()
+                        .HasForeignKey("GeneroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genero");
+                });
+
+            modelBuilder.Entity("Entidades.Models.Incidente", b =>
+                {
+                    b.HasOne("Entidades.Models.Ciudadano", "Ciudadano")
                         .WithMany("Incidentes")
                         .HasForeignKey("CiudadanoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("api.denuncia.Models.TipoIncidente", "TipoIncidente")
+                    b.HasOne("Entidades.Models.TipoIncidente", "TipoIncidente")
                         .WithMany("Incidentes")
                         .HasForeignKey("TipoIncidenteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -228,15 +260,15 @@ namespace api.denuncia.Migrations
                     b.Navigation("TipoIncidente");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Intervencion", b =>
+            modelBuilder.Entity("Entidades.Models.Intervencion", b =>
                 {
-                    b.HasOne("api.denuncia.Models.Policia", "Policia")
+                    b.HasOne("Entidades.Models.Policia", "Policia")
                         .WithMany("Intervenciones")
                         .HasForeignKey("CIP")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("api.denuncia.Models.Incidente", "Incidente")
+                    b.HasOne("Entidades.Models.Incidente", "Incidente")
                         .WithMany("Intervenciones")
                         .HasForeignKey("IncidenteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -247,9 +279,9 @@ namespace api.denuncia.Migrations
                     b.Navigation("Policia");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Policia", b =>
+            modelBuilder.Entity("Entidades.Models.Policia", b =>
                 {
-                    b.HasOne("api.denuncia.Models.Grado", "Grado")
+                    b.HasOne("Entidades.Models.Grado", "Grado")
                         .WithMany()
                         .HasForeignKey("GradoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -258,22 +290,22 @@ namespace api.denuncia.Migrations
                     b.Navigation("Grado");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Ciudadano", b =>
+            modelBuilder.Entity("Entidades.Models.Ciudadano", b =>
                 {
                     b.Navigation("Incidentes");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Incidente", b =>
+            modelBuilder.Entity("Entidades.Models.Incidente", b =>
                 {
                     b.Navigation("Intervenciones");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.Policia", b =>
+            modelBuilder.Entity("Entidades.Models.Policia", b =>
                 {
                     b.Navigation("Intervenciones");
                 });
 
-            modelBuilder.Entity("api.denuncia.Models.TipoIncidente", b =>
+            modelBuilder.Entity("Entidades.Models.TipoIncidente", b =>
                 {
                     b.Navigation("Incidentes");
                 });
