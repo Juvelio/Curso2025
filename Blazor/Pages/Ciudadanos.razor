@@ -6,68 +6,137 @@
 
 <h3 class="mb-4">Ciudadanos</h3>
 
+@if (mostrarFormulario)
+{
+    <div class="card mt-4">
+        <div class="card-header">
+            <strong>@(ciudadano.Id == 0 ? "Agregar Persona" : "Editar Persona")</strong>
+        </div>
+        <div class="card-body">
+            @* <EditForm Model="@ciudadano" OnValidSubmit="Guardar">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" />
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Nombres" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Paterno</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Paterno" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Materno</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Materno" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Telefono" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Direccion" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Género</label>
+                        <InputSelect class="form-select" @bind-Value="ciudadano.GeneroId">
+                            <option disabled value="">-- Seleccionar --</option>
+                            @foreach (var genero in generos)
+                            {
+                                <option value="@genero.Id">@genero.Descripcion</option>
+                            }
+                        </InputSelect>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                    <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+                </div>
+            </EditForm> *@
+            <EditForm Model="@ciudadano" OnValidSubmit="Guardar">
+   @*              
+                 *@
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">DNI</label>
+                        <InputNumber class="form-control" @bind-Value="ciudadano.DNI" />
+                        <ValidationMessage For="@(() => ciudadano.DNI)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Nombres</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Nombres" />
+                        <ValidationMessage For="@(() => ciudadano.Nombres)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Paterno</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Paterno" />
+                        <ValidationMessage For="@(() => ciudadano.Paterno)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Materno</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Materno" />
+                        <ValidationMessage For="@(() => ciudadano.Materno)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Teléfono</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Telefono" />
+                        <ValidationMessage For="@(() => ciudadano.Telefono)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Dirección</label>
+                        <InputText class="form-control" @bind-Value="ciudadano.Direccion" />
+                        <ValidationMessage For="@(() => ciudadano.Direccion)" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Género</label>
+                        <InputSelect class="form-select" @bind-Value="ciudadano.GeneroId">
+                            <option disabled value="">-- Seleccionar --</option>
+                            @foreach (var genero in generos)
+                            {
+                                <option value="@genero.Id">@genero.Descripcion</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => ciudadano.GeneroId)" />
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary me-2">Guardar</button>
+                    <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+
+    <br />
+}
+
+<button class="btn btn-success mb-3" @onclick="Nuevo">Agregar persona</button>
+
+
 @if (ciudadanos == null || generos == null)
 {
     <div class="alert alert-info">Cargando datos...</div>
 }
+else if (ciudadanos.Count == 0)
+{
+    <div class="alert alert-warning">No hay ciudadanos registrados.</div>
+}
 else
 {
-
-    @if (mostrarFormulario)
-    {
-        <div class="card mt-4">
-            <div class="card-header">
-                <strong>@(ciudadano.Id == 0 ? "Agregar Persona" : "Editar Persona")</strong>
-            </div>
-            <div class="card-body">
-                <EditForm Model="@ciudadano" OnValidSubmit="Guardar">
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Nombres</label>
-                            <InputText class="form-control" @bind-Value="ciudadano.Nombres" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Paterno</label>
-                            <InputText class="form-control" @bind-Value="ciudadano.Paterno" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Materno</label>
-                            <InputText class="form-control" @bind-Value="ciudadano.Materno" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Teléfono</label>
-                            <InputText class="form-control" @bind-Value="ciudadano.Telefono" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Dirección</label>
-                            <InputText class="form-control" @bind-Value="ciudadano.Direccion" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Género</label>
-                            <InputSelect class="form-select" @bind-Value="ciudadano.GeneroId">
-                                <option disabled value="">-- Seleccionar --</option>
-                                @foreach (var genero in generos)
-                                {
-                                    <option value="@genero.Id">@genero.Descripcion</option>
-                                }
-                            </InputSelect>
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <button type="submit" class="btn btn-primary me-2">Guardar</button>
-                        <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
-                    </div>
-                </EditForm>
-            </div>
-        </div>
-    }
-
-    <button class="btn btn-success mb-3" @onclick="Nuevo">Agregar persona</button>
-
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>
+                <th>DNI</th>
                 <th>Nombre</th>
                 <th>Paterno</th>
                 <th>Materno</th>
@@ -82,6 +151,7 @@ else
             {
                 var generoNombre = generos.FirstOrDefault(g => g.Id == p.GeneroId)?.Descripcion;
                 <tr>
+                    <td>@p.DNI</td>
                     <td>@p.Nombres</td>
                     <td>@p.Paterno</td>
                     <td>@p.Materno</td>
@@ -98,11 +168,7 @@ else
             }
         </tbody>
     </table>
-
-    
 }
-
-
 
 @code {
     List<Ciudadano> ciudadanos;
@@ -132,6 +198,7 @@ else
         ciudadano = new Ciudadano
         {
             Id = p.Id,
+            DNI = p.DNI,            
             Nombres = p.Nombres,
             Paterno = p.Paterno,
             Materno = p.Materno,

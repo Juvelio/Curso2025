@@ -6,18 +6,19 @@ namespace Entidades.Models
 {
     public class Ciudadano : Persona
     {
-        [Key, Required, MaxLength(8)]
+        [Key, Required]
         public int Id { get; set; }
 
-        [MaxLength(15)]
+        [Required(ErrorMessage = "El telefono es requerido"), MaxLength(15)]
         public string Telefono { get; set; }
 
-        [MaxLength(50)]
+        [Required(ErrorMessage = "La dirreccion es requerido"), MaxLength(50)]
         public string Direccion { get; set; }
 
         public ICollection<Incidente> Incidentes { get; set; }
 
         [ForeignKey(nameof(Genero))]
+        [Required(ErrorMessage = "El genero es requerido"), Range(1, int.MaxValue, ErrorMessage = "El genero es requerido")]
         public int GeneroId { get; set; }
         public Genero Genero { get; set; }
     }

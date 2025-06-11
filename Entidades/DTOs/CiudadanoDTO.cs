@@ -13,14 +13,15 @@ namespace Entidades.DTOs
     {
         public int Id { get; set; }
 
-        [MaxLength(15)]
+        [Required, MaxLength(15, ErrorMessage = "El telefono es requerido")]
         public string Telefono { get; set; }
 
-        [MaxLength(50)]
+        [Required, MaxLength(50, ErrorMessage = "La dirreccion es requerido")]
         public string Direccion { get; set; }
 
         public ICollection<Incidente> Incidentes { get; set; }
 
+        [Required, MaxLength(50, ErrorMessage = "El genero es requerido")]
         public int GeneroId { get; set; }
         public GeneroDTO Genero { get; set; }
     }
