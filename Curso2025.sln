@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicio", "Servicio\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "Entidades\Entidades.csproj", "{CAA5EAEB-CA96-43FB-B559-FD6B4380DECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.denuncia", "api.denuncia\api.denuncia.csproj", "{A2545A0F-CB5A-4316-A86A-594E557C38BE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{CAA5EAEB-CA96-43FB-B559-FD6B4380DECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAA5EAEB-CA96-43FB-B559-FD6B4380DECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAA5EAEB-CA96-43FB-B559-FD6B4380DECD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2545A0F-CB5A-4316-A86A-594E557C38BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2545A0F-CB5A-4316-A86A-594E557C38BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2545A0F-CB5A-4316-A86A-594E557C38BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2545A0F-CB5A-4316-A86A-594E557C38BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

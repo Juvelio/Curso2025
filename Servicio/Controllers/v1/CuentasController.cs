@@ -1,13 +1,13 @@
-﻿using Entidades.DTOs;
-using Entidades.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Servicio.Data;
+﻿using Entidades.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using Servicio.Data;
+using Entidades.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace Servicio.Controllers.v1
 {
@@ -24,33 +24,37 @@ namespace Servicio.Controllers.v1
             _configuration = configuration;
         }
 
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] UserLogin userLogin)
-        {          
-            var user = await _context.Personas.FirstOrDefaultAsync(u => u.Usuario == userLogin.Username && u.Pass == userLogin.Password);
+        [HttpPost]
+        public async Task<ActionResult<string>> Login(UserLogin userLogin)
+        {            
+            //var usuario = await _context.Usuarios
+            //    .Where(p => p.UserName == userLogin.UserName && p.Password == userLogin.Password)
+            //    .FirstOrDefaultAsync();
 
-            if (user == null)
-            {
-                return Unauthorized("Usuario o coantraseña inconrecta");
-            }
+            //if (usuario == null)
+            //{
+            //    return NotFound("No pudo iniciar sesion");
+            //}         
 
-            var token = GenerarToken(user); 
+            //DEVOLVER UN TOKEN
+            var usuario = new Persona() { DNI = 12345678, Paterno = "GARCIA", Materno = "PEREZ", Nombres = "Alan" };       //SIMULAR PERSONA
+            var token = GenerarTokenJWT(usuario);
             return Ok(token);
         }
 
-        private string GenerarToken(Persona user)
+        private string GenerarTokenJWT(Persona persona)
         {
             // CREAMOS EL HEADER
             var _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:ClaveSecreta"]));
             var _signingCredentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
             var _header = new JwtHeader(_signingCredentials);
 
-            // CREARMOS LOS CLAIMS
+            //CREAR LOS CLAIMS
             var _claims = new[]
-           {
+            {
                  new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                 new Claim("nombre", user.Nombres),
-                 new Claim("paterno", user.Nombres),
+                 new Claim("nombre", persona.Nombres),
+                 new Claim("paterno", persona.Paterno),
                  new Claim("llave", "El valor que yo quiera"),
 				 //new Claim(JwtRegisteredClaimNames.Email, usuarioInfo.Email),
 				 new Claim(ClaimTypes.Role, "admin")
@@ -65,11 +69,11 @@ namespace Servicio.Controllers.v1
                 expires: DateTime.UtcNow.AddDays(1)
                 );
 
-            // CREAMOS EL TOKEN
+            // GENERAR TOKEN
             var _token = new JwtSecurityToken(_header, _payload);
-
 
             return new JwtSecurityTokenHandler().WriteToken(_token);
         }
+
     }
 }

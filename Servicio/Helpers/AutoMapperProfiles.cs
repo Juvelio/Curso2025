@@ -8,7 +8,7 @@ namespace Servicio.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Persona, PersonaDTO>().ReverseMap();
+            CreateMap<PersonaX, PersonaDTO>().ReverseMap();
             CreateMap<Genero, GeneroDTO>().ReverseMap();
         }
     }
