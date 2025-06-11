@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Entidades.Models;
 using Servicio.Data;
+using Entidades.DTOs;
+using AutoMapper;
 
 namespace Servicio.Controllers.v1
 {
@@ -15,24 +17,31 @@ namespace Servicio.Controllers.v1
     public class CiudadanosController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
 
-        public CiudadanosController(ApplicationDbContext context)
+        public CiudadanosController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Ciudadanos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ciudadano>>> GetCiudadanos()
         {
-            return await _context.Ciudadanos.ToListAsync();
+            return await _context.Ciudadanos
+                .Include(c => c.Genero)
+                .ToListAsync();
         }
 
         // GET: api/Ciudadanos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Ciudadano>> GetCiudadano(int id)
         {
-            var ciudadano = await _context.Ciudadanos.FindAsync(id);
+            var ciudadano = await _context.Ciudadanos
+                .Include(c => c.Genero)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
 
             if (ciudadano == null)
             {
@@ -45,8 +54,10 @@ namespace Servicio.Controllers.v1
         // PUT: api/Ciudadanos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCiudadano(int id, Ciudadano ciudadano)
+        public async Task<IActionResult> PutCiudadano(int id, CiudadanoCrearDTO dTO)
         {
+            var ciudadano = _mapper.Map<Ciudadano>(dTO);
+
             if (id != ciudadano.Id)
             {
                 return BadRequest();
@@ -76,8 +87,9 @@ namespace Servicio.Controllers.v1
         // POST: api/Ciudadanos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ciudadano>> PostCiudadano(Ciudadano ciudadano)
+        public async Task<ActionResult<Ciudadano>> PostCiudadano(CiudadanoCrearDTO dTO)
         {
+            var ciudadano = _mapper.Map<Ciudadano>(dTO);
             _context.Ciudadanos.Add(ciudadano);
             await _context.SaveChangesAsync();
 

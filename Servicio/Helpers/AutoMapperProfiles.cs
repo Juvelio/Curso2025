@@ -8,8 +8,16 @@ namespace Servicio.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<PersonaX, PersonaDTO>().ReverseMap();
             CreateMap<Genero, GeneroDTO>().ReverseMap();
+
+            CreateMap<Policia, PoliciaDTO>().ReverseMap();
+            CreateMap<Policia, PoliciaCrearDTO>().ReverseMap();
+
+            CreateMap<Grado, GradoDTO>().ReverseMap();
+            CreateMap<Intervencion, IntervencionDTO>().ReverseMap();
+
+            CreateMap<Ciudadano, CiudadanoDTO>().ReverseMap();
+            CreateMap<Ciudadano, CiudadanoCrearDTO>().ReverseMap();
         }
     }
 }
