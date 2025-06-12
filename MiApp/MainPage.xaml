@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiApp.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label FontSize="Title" Text=" Controles de Entrada"/>
+            <Entry Placeholder="Ingrese texto aqui"/>
+
+            <Editor Placeholder="Escriba un comentario"/>
+
+            <Picker Title="Selecione una opcion">
+                <Picker.Items>
+                    <x:String>Opción 1</x:String>
+                    <x:String>Opción 2</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <DatePicker/>
+
+            <TimePicker/>
+
+            <Label FontSize="Title" Text=" Controles de Boton"/>
+
+            <Button Text="Haz clic aquí"
+                WidthRequest="150"/>
+
+            <ImageButton Source="casa.png"
+                     BackgroundColor="LightGray"
+                     WidthRequest="150"/>
+
+            <Label FontSize="Title" Text=" Controles de Seleccion"/>
+
+            <CheckBox IsChecked="True"/>
+
+            <RadioButton IsChecked="True"/>
+
+            <Switch IsToggled="True"/>
+
+            <Label FontSize="Title" Text=" Controles de Presentacion"/>
+
+            <Label Text="Hola, Mundo"/>
+
+            <Image Source="dotnet_bot.png"
+                   HeightRequest="50"
+                   />
+            <ProgressBar Progress="0.5"/>
+
+
+            <ActivityIndicator IsRunning="True"/>
+
+                        <Label Text="Hola, Mundo"/>
+            <Label FontSize="Title" Text=" Contenedores"/>
+
+
+            <StackLayout Orientation="Vertical">
+                <Label Text="Nombre" />
+                <Entry Placeholder="ddd"/>
+            </StackLayout>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="Fila 1" Grid.Row="0"/>
+                <Label Text="Fila 2" Grid.Row="1"/>
+            </Grid>
+
+            <FlexLayout Direction="Row" Wrap="Wrap">
+                <Label Text="Uno"/>
+                <Label Text="Dos"/>
+            </FlexLayout>
+
+
+            <Slider Minimum="0" Maximum="100" Value="50"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
