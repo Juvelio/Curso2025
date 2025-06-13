@@ -6,15 +6,15 @@
     xmlns:local="clr-namespace:MiApp.Views"
     
     Shell.BackgroundColor="{StaticResource Primary}"
-    Shell.TitleColor="White"
-    
-    Shell.BackButtonBehavior="{StaticResource Primary}"
+    Shell.TitleColor="White"    
+
     Shell.TabBarBackgroundColor="{StaticResource Primary}"
     Shell.TabBarTitleColor="White"
     Shell.TabBarForegroundColor="White"
     
     Shell.TabBarUnselectedColor="#95FFFFFF"
     Title="MiApp">
+    
 
     <!--<Shell.Resources>
         <ResourceDictionary>
