@@ -6,4 +6,9 @@ public partial class InicioPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void btnRepositorio_Clicked(object sender, EventArgs e)
+    {
+		await Browser.OpenAsync("https://github.com/Juvelio/Curso2025");
+    }
 }

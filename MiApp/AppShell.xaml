@@ -4,8 +4,27 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MiApp.Views"
+    
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Shell.TitleColor="White"
+    
+    Shell.BackButtonBehavior="{StaticResource Primary}"
+    Shell.TabBarBackgroundColor="{StaticResource Primary}"
+    Shell.TabBarTitleColor="White"
+    Shell.TabBarForegroundColor="White"
+    
+    Shell.TabBarUnselectedColor="#95FFFFFF"
     Title="MiApp">
 
+    <!--<Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseSyle" TargetType="Shell">
+                
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>-->
+    
+    
     <!--<Tab>
         <ShellContent
             Title="Inicio"
