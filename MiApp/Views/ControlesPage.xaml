@@ -5,10 +5,328 @@
              Title="Galeria de controles">
 
 
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina de controles"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <x:Array x:Key="MyItems" Type="{x:Type x:String}">
+            <x:String>A</x:String>
+            <x:String>B</x:String>
+            <x:String>C</x:String>
+        </x:Array>
+        <Style TargetType="Border">
+            <Setter Property="StrokeShape" >
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="10" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView VerticalScrollBarVisibility="{OnPlatform Android=Never}">
+        <VerticalStackLayout Padding="20" Spacing="30">
+
+            <!-- Layouts -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Layouts" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <AbsoluteLayout HeightRequest="60" BackgroundColor="#EEE">
+                        <BoxView Color="#B3E5FC" AbsoluteLayout.LayoutBounds="0,0,50,50" AbsoluteLayout.LayoutFlags="None" />
+                    </AbsoluteLayout>
+                    <StackLayout Orientation="Vertical" Spacing="5">
+                        <Label Text="BindableLayout ejemplo:" />
+                        <StackLayout BindableLayout.ItemsSource="{StaticResource MyItems}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Text="{Binding}" BackgroundColor="#E1F5FE" Padding="4" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <!-- 
+                    FLEX 1: Distribuye 3 elementos horizontalmente en una sola fila.
+                    Usa SpaceBetween para separarlos uniformemente (primero a la izquierda, último a la derecha, uno en el centro).
+                    No se envuelven (Wrap no está activado), ideal para encabezados o botones en fila.                
+                    -->
+                    <FlexLayout 
+                        Direction="Row" 
+                        JustifyContent="SpaceBetween" 
+                        AlignItems="Center" 
+                        BackgroundColor="#E3F2FD"
+                        Padding="5"
+                        Margin="10">
+                        <Label Text="Elemento 1" BackgroundColor="#90CAF9" Padding="10" />
+                        <Label Text="Elemento 2" BackgroundColor="#64B5F6" Padding="10" />
+                        <Label Text="Elemento 3" BackgroundColor="#42A5F5" Padding="10" />
+                    </FlexLayout>
+
+
+                    <!-- 
+                    FLEX 2: Diseño tipo grilla fluida con tamaño fijo (100px de ancho).
+                    Al llegar al límite del ancho disponible, los elementos "saltan" a la siguiente fila gracias a Wrap="Wrap".
+                    JustifyContent="Center" centra todos los ítems horizontalmente por fila.
+                    Ideal para mostrar tarjetas, botones o bloques de igual tamaño.
+                    -->
+                    <FlexLayout 
+                        Direction="Row" 
+                        Wrap="Wrap" 
+                        JustifyContent="Center"
+                        AlignItems="Start"
+                        BackgroundColor="#F3E5F5"
+                        Padding="5">
+                        <Label Text="A" WidthRequest="100" HeightRequest="50" BackgroundColor="#CE93D8" Margin="1"/>
+                        <Label Text="B" WidthRequest="100" HeightRequest="50" BackgroundColor="#BA68C8" Margin="1"/>
+                        <Label Text="C" WidthRequest="100" HeightRequest="50" BackgroundColor="#AB47BC" Margin="1"/>
+                        <Label Text="D" WidthRequest="100" HeightRequest="50" BackgroundColor="#9C27B0" Margin="1"/>
+                        <Label Text="D" WidthRequest="100" HeightRequest="50" BackgroundColor="#9C27B0" Margin="1"/>
+                    </FlexLayout>
+
+
+
+                    <!-- 
+                    FLEX 3: Grilla responsiva en la que cada elemento ocupa el 33.3% del ancho disponible (3 elementos por fila).
+                    FlexLayout.Grow="1" y Basis="33.3%" hacen que los elementos se ajusten proporcionalmente y llenen el espacio.
+                    Wrap="Wrap" permite que cuando ya no haya espacio, los siguientes elementos bajen a una nueva fila.
+                    Muy útil para diseños adaptables tipo "cards" o tablas visuales.
+                    -->
+                    <FlexLayout                         
+                        Direction="Row"
+                        Wrap="Wrap"
+                        JustifyContent="Start"
+                        AlignItems="Start"
+                        BackgroundColor="#F1F8E9"
+                        Padding="0"
+                        Margin="0">
+
+                        <Border FlexLayout.Grow="1" FlexLayout.Basis="33.3%" Margin="5" HeightRequest="40" BackgroundColor="#AED581">
+                            <Label Text="Item 1" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+
+                        <Border FlexLayout.Grow="1" FlexLayout.Basis="33.3%" Margin="5" HeightRequest="40" BackgroundColor="#81C784">
+                            <Label Text="Item 2" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+
+                        <Border FlexLayout.Grow="1" FlexLayout.Basis="33.3%" Margin="5" HeightRequest="40" BackgroundColor="#4CAF50">
+                            <Label Text="Item 3" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+
+                        <Border FlexLayout.Grow="1" FlexLayout.Basis="33.3%" Margin="5" HeightRequest="40" BackgroundColor="#388E3C">
+                            <Label Text="Item 4" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+
+                        <Border FlexLayout.Grow="1" FlexLayout.Basis="33.3%" Margin="5" HeightRequest="40" BackgroundColor="#2E7D32">
+                            <Label Text="Item 5" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+
+                    </FlexLayout>
+
+
+
+
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" RowSpacing="5" ColumnSpacing="5" BackgroundColor="#FFF3E0">
+                        <BoxView Color="#FFCC80" Grid.Row="0" Grid.Column="0" HeightRequest="30" />
+                        <BoxView Color="#FFAB91" Grid.Row="0" Grid.Column="1" HeightRequest="30" />
+                        <BoxView Color="#FFE082" Grid.Row="1" Grid.Column="0" HeightRequest="30" />
+                        <BoxView Color="#FFCCBC" Grid.Row="1" Grid.Column="1" HeightRequest="30" />
+                    </Grid>
+                    <HorizontalStackLayout Spacing="10" BackgroundColor="#FCE4EC">
+                        <Button Text="H1" />
+                        <Button Text="H2" />
+                    </HorizontalStackLayout>
+                    <VerticalStackLayout Spacing="10" BackgroundColor="#EDE7F6">
+                        <Button Text="V1" />
+                        <Button Text="V2" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Contenedores y vistas compuestas -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Contenedores y vistas compuestas" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <ContentView BackgroundColor="#FFFDE7" Padding="8">
+                        <Label Text="ContentView ejemplo" />
+                    </ContentView>
+                    <Border Stroke="#BDBDBD" StrokeThickness="1"  Padding="8">
+                        <Label Text="Border ejemplo" />
+                    </Border>
+                    <ScrollView HeightRequest="60" BackgroundColor="#E0F7FA">
+                        <Label Text="ScrollView demo: Lorem ipsum dolor sit amet..." />
+                    </ScrollView>
+
+                    <Label Text="SwipeView demo"  />
+                    <SwipeView HeightRequest="50">
+                        <!-- Acción al deslizar hacia la izquierda -->
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem 
+                                    Text="Eliminar" 
+                                    BackgroundColor="Red"
+                                    IconImageSource="delete.png" />
+
+                                <SwipeItem 
+                                    Text="Editar" 
+                                    BackgroundColor="Orange"
+                                    IconImageSource="edit.png" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <!-- Contenido del swipe -->
+                        <SwipeView.Content>
+                            <Grid BackgroundColor="#E0F7E5">
+                                <Label 
+                                    Text="Desliza hacia la izquierda"
+                                    VerticalOptions="Center" 
+                                    HorizontalOptions="Center"
+                                    FontSize="16" 
+                                    TextColor="Black"/>
+                            </Grid>
+                        </SwipeView.Content>
+
+                    </SwipeView>
+
+
+
+                    <RefreshView HeightRequest="60">
+                        <ScrollView>
+                            <Label Text="RefreshView demo: pull to refresh" />
+                        </ScrollView>
+                    </RefreshView>
+                    <!--<maps:TwoPaneView Pane1="<Label Text='Pane1' />" Pane2="<Label Text='Pane2' />" HeightRequest="80" />-->
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Controles de colección -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Controles de colección" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <CollectionView HeightRequest="80" BackgroundColor="#F3E5F5">
+                        <CollectionView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Item1</x:String>
+                                <x:String>Item2</x:String>
+                            </x:Array>
+                        </CollectionView.ItemsSource>
+                    </CollectionView>
+                    <CarouselView HeightRequest="80" BackgroundColor="#E8F5E9">
+                        <CarouselView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Slide1</x:String>
+                                <x:String>Slide2</x:String>
+                            </x:Array>
+                        </CarouselView.ItemsSource>
+                    </CarouselView>
+                    <ListView HeightRequest="80" BackgroundColor="#FFEBEE">
+                        <ListView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>List1</x:String>
+                                <x:String>List2</x:String>
+                            </x:Array>
+                        </ListView.ItemsSource>
+                    </ListView>
+                    <TableView Intent="Form" HeightRequest="100" BackgroundColor="#E1F5FE">
+                        <TableRoot>
+                            <TableSection Title="Section">
+                                <TextCell Text="Cell1" />
+                                <TextCell Text="Cell2" />
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Controles de entrada -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Controles de entrada" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <Button Text="Button" />
+                    <CheckBox IsChecked="True" />
+                    <Entry Text="Entry" />
+                    <Editor Text="Editor multiline" HeightRequest="60" />
+                    <Picker Title="Picker demo">
+                        <Picker.Items>
+                            <x:String>Opción 1</x:String>
+                            <x:String>Opción 2</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <SearchBar Text="SearchBar" />
+                    <Slider Minimum="0" Maximum="100" Value="25" />
+                    <Stepper Minimum="0" Maximum="10" Value="2" />
+                    <Switch IsToggled="False" />
+                    <RadioButton Content="RadioButton" />
+                    <DatePicker Date="2025-06-12" />
+                    <TimePicker Time="12:00:00" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Controles de visualización -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Controles de visualización" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <Label Text="Label" />
+                    <Image Source="dotnet_bot.png" HeightRequest="80" />
+                    <ImageButton Source="dotnet_bot.png" HeightRequest="60" />
+                    <BoxView Color="#FF5722" HeightRequest="20" />
+                    <WebView Source="https://docs.microsoft.com/dotnet/maui/" HeightRequest="200" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Indicadores y progreso -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Indicadores y progreso" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <ActivityIndicator IsRunning="True" />
+                    <ProgressBar Progress="0.5" />
+                    <IndicatorView Count="3" Position="1" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Formas y gráficos vectoriales -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Formas y gráficos vectoriales" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <Ellipse HeightRequest="60" WidthRequest="100" Stroke="Black" StrokeThickness="2" />
+                    <Line X1="0" Y1="0" X2="100" Y2="0" Stroke="Black" StrokeThickness="2" />
+                    <Path Data="M10,100 L100,100" Stroke="Black" StrokeThickness="2" />
+                    <Polygon Points="0,0 50,100 100,0" Stroke="Black" StrokeThickness="2" />
+                    <Polyline Points="0,100 50,0 100,100" Stroke="Black" StrokeThickness="2" />
+                    <Rectangle HeightRequest="60" WidthRequest="100" Stroke="Black" StrokeThickness="2" />
+                    <RoundRectangle HeightRequest="60" WidthRequest="100" CornerRadius="10" Stroke="Black" StrokeThickness="2" />
+                    <!--<GraphicsView HeightRequest="150" Drawable="{StaticResource SampleDrawable}" />-->
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Web y contenido híbrido -->
+            <!--<Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Web y contenido híbrido" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <BlazorWebView HostPage="wwwroot/index.html">
+                        <BlazorWebView.RootComponents>
+                            <RootComponent Selector="#app" ComponentType="typeof(App)" />
+                        </BlazorWebView.RootComponents>
+                    </BlazorWebView>
+                    <HybridWebView Source="local.html" HeightRequest="100" />
+                </VerticalStackLayout>
+            </Border>-->
+
+            <!-- Mapas -->
+            <!--<Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Mapas" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <maps:Map HeightRequest="200" />
+                </VerticalStackLayout>
+            </Border>-->
+
+            <!-- Páginas -->
+            <Border Stroke="#DDD" StrokeThickness="1"  Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Páginas" FontSize="20" FontAttributes="Bold" TextColor="#37474F" />
+                    <Label Text="ContentPage" />
+                    <Label Text="FlyoutPage" />
+                    <Label Text="NavigationPage" />
+                    <Label Text="TabbedPage" />
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
