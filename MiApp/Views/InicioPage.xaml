@@ -2,7 +2,70 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.InicioPage"
+             Shell.NavBarIsVisible="False"
              Title="Inicio">
 
+
+    <!--<Grid RowDefinitions="*,*,*" ColumnDefinitions="*,150" BackgroundColor="Gray">
+
+        <Grid Grid.Row="0" Grid.Column="0" BackgroundColor="Blue" > </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" BackgroundColor="Red"> </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" BackgroundColor="Yellow"> </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1" BackgroundColor="Green"> </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" BackgroundColor="Fuchsia"></Grid>
+        <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="Orange"></Grid>
+    </Grid>-->
+
+
+    <Grid RowDefinitions="auto,*,*">
+      
+        <VerticalStackLayout Grid.Row="0"
+            Spacing="10"
+            Padding="10"
+            BackgroundColor="{StaticResource Primary}">
+           
+            <Grid ColumnDefinitions="auto, *, auto">
+                <Image Grid.Column="0" Source="logopnp.png" 
+                       WidthRequest="60"/>
+                
+                <Label Grid.Column="1" 
+                       FontFamily="OpenSansSemibold"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       TextColor="White"
+                       FontSize="20"
+                       Text="POLICÍA NACIONAL DEL PERÚ"/>
+                
+                <Image Grid.Column="2" Source="logouniins.png" 
+                       WidthRequest="60"/>
+            </Grid>
+
+            <BoxView BackgroundColor="Yellow" HeightRequest="1"/>
+
+            <Label TextColor="White" 
+                   FontSize="Small"
+                   HorizontalTextAlignment="Center"
+                   Text="XXXI CURSO DE ESPECIALIZACIÓN PROGRAMAXIÓN Y DESARROLLO DE SOWFTWARE" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1"
+                             Padding="10">
+            <Image Source="logopnp.png" HeightRequest="250"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" 
+                             Padding="10"
+                             VerticalOptions="End">
+            
+            
+            <Button Text="REPOSITORIO"
+                    CornerRadius="20"
+                    ImageSource="github_brands_solid_white.png"
+                    HeightRequest="40"
+                    WidthRequest="150"/>
+        </VerticalStackLayout>
+        
+    </Grid>
     
 </ContentPage>
