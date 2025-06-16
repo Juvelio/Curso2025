@@ -6,4 +6,9 @@ public partial class ImcPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void btnSiguiente_Clicked(object sender, EventArgs e)
+    {
+		await Shell.Current.GoToAsync(nameof(CalcularIMCPage));
+    }
 }

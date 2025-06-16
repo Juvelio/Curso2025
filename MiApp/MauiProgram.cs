@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MiApp.Views;
+using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MiApp
@@ -17,8 +18,12 @@ namespace MiApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<CalcularIMCPage>();
+            Routing.RegisterRoute(nameof(CalcularIMCPage),
+                typeof(CalcularIMCPage));
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

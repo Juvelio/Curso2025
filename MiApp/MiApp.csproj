@@ -67,6 +67,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\CalcularIMCPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\CiudadanosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

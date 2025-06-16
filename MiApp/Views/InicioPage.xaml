@@ -114,6 +114,7 @@
 
                 <Button Text="REPOSITORIO"
                     CornerRadius="20"
+                        Clicked="btnRepositorio_Clicked"
                     ImageSource="github_brands_solid_white.png"
                     HeightRequest="40"
                     WidthRequest="150"/>

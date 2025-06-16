@@ -2,11 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.ImcPage"
-             Title="ImcPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina IMC"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Calculadora IMC">
+    
+    <Grid  RowDefinitions="*,*">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{StaticResource Primary}" Offset="0.1"/>
+                <GradientStop Color="White" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <VerticalStackLayout Grid.Row="0">
+            <Image  Source="robot.png" HeightRequest="200"/>
+            <Label Text="Bienvenido" FontSize="25" TextColor="White" 
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="a mi calculadora IMC" FontSize="Small" TextColor="White" 
+                   HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1" BackgroundColor="White" Padding="10,20"
+                StrokeShape="{RoundRectangle CornerRadius='60,60,0,0'}">
+
+            <VerticalStackLayout WidthRequest="250" Spacing="20">
+                <Label Text="¿Cual es tu nombre?" HorizontalTextAlignment="Center"/>
+                <Border>
+                    <Entry Placeholder="Ingrese su nombre"/>
+                </Border>
+
+                <Button x:Name="btnSiguiente" Text="Siguiente" 
+                        Clicked="btnSiguiente_Clicked"
+                        WidthRequest="120" HorizontalOptions="End"/>
+            </VerticalStackLayout>       
+            
+            
+        </Border>
+        
+        
+
+    </Grid>
 </ContentPage>
