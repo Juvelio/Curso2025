@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.InicioPage"
              Shell.NavBarIsVisible="False"
+
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              xmlns:Models="clr-namespace:MiApp.Models"
              Title="Inicio">
 
@@ -37,7 +39,7 @@
 
             <VerticalStackLayout Grid.Row="0"
             Spacing="10"
-            Padding="10"
+            Padding="10,10,10,0"
             BackgroundColor="{StaticResource Primary}">
 
                 <Grid ColumnDefinitions="auto, *, auto">
@@ -56,21 +58,31 @@
                        WidthRequest="60"/>
                 </Grid>
 
-                <BoxView BackgroundColor="Yellow" HeightRequest="1"/>
+                <BoxView BackgroundColor="#ba9e66" HeightRequest="1" Margin="-10,0,-10,0"/>
 
                 <Label TextColor="White" 
                    FontSize="Small"
                    HorizontalTextAlignment="Center"
                    Text="XXXI CURSO DE ESPECIALIZACIÓN PROGRAMAXIÓN Y DESARROLLO DE SOWFTWARE" />
+
+                <BoxView BackgroundColor="#ba9e66" HeightRequest="2" Margin="-10,0,-10,0"/>
+
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Row="1"
+                                 VerticalOptions="Center"
                              Padding="10">
-                <Image Source="logopnp.png" HeightRequest="300"/>
+                <!--<Image Source="logopnp.png" HeightRequest="300"/>-->
+
+                <skia:SKLottieView Source="mimaui.json"
+                                   RepeatCount="-1"
+                                   HeightRequest="250"/>
+
+
             </VerticalStackLayout>
 
             <VerticalStackLayout Grid.Row="2" 
-                             Padding="10"
+                             Padding="10,10,10,30"
                                  Spacing="10"                                 
                              VerticalOptions="End">
                 <CarouselView ItemsSource="{StaticResource DataCarrusel}" 
