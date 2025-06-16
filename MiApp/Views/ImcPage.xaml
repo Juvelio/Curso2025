@@ -32,12 +32,7 @@
                 <Button x:Name="btnSiguiente" Text="Siguiente" 
                         Clicked="btnSiguiente_Clicked"
                         WidthRequest="120" HorizontalOptions="End"/>
-            </VerticalStackLayout>       
-            
-            
-        </Border>
-        
-        
-
+            </VerticalStackLayout>                    
+        </Border>  
     </Grid>
 </ContentPage>
