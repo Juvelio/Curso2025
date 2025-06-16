@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.InicioPage"
              Shell.NavBarIsVisible="False"
+             xmlns:Models="clr-namespace:MiApp.Models"
              Title="Inicio">
 
 
@@ -17,55 +18,95 @@
         <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="Orange"></Grid>
     </Grid>-->
 
+    <ContentPage.Resources>
+        <x:Array x:Key="DataCarrusel" Type="{x:Type Models:CarouselItem}">
+            <Models:CarouselItem Titulo="Web APIs RESTfull con ASP .NET"
+                                 Descripcion="Admite la virtualización de datos incremental a medida que se desplaza el usuario. Esto permite escenarios como cargar de forma asincrónica una página de datos desde un servicio web, a medida que el usuario se desplaza."/>
 
-    <Grid RowDefinitions="auto,*,*">
-      
-        <VerticalStackLayout Grid.Row="0"
+            <Models:CarouselItem Titulo=".NET Multi-Platform App UI"
+                                 Descripcion="Compile aplicaciones móviles y de escritorio nativas multiplataforma en un solo marco."/>
+
+            <Models:CarouselItem Titulo="Crear. Probar. Implementar."
+                                 Descripcion=".NET es el marco multiplataforma gratuito de código abierto para compilar aplicaciones modernas y servicios eficaces en la nube."/>
+        </x:Array>
+    </ContentPage.Resources>
+
+    <ScrollView>
+
+        <Grid RowDefinitions="auto,*,*">
+
+            <VerticalStackLayout Grid.Row="0"
             Spacing="10"
             Padding="10"
             BackgroundColor="{StaticResource Primary}">
-           
-            <Grid ColumnDefinitions="auto, *, auto">
-                <Image Grid.Column="0" Source="logopnp.png" 
+
+                <Grid ColumnDefinitions="auto, *, auto">
+                    <Image Grid.Column="0" Source="logopnp.png" 
                        WidthRequest="60"/>
-                
-                <Label Grid.Column="1" 
+
+                    <Label Grid.Column="1" 
                        FontFamily="OpenSansSemibold"
                        VerticalOptions="Center"
                        HorizontalTextAlignment="Center"
                        TextColor="White"
                        FontSize="20"
                        Text="POLICÍA NACIONAL DEL PERÚ"/>
-                
-                <Image Grid.Column="2" Source="logouniins.png" 
+
+                    <Image Grid.Column="2" Source="logouniins.png" 
                        WidthRequest="60"/>
-            </Grid>
+                </Grid>
 
-            <BoxView BackgroundColor="Yellow" HeightRequest="1"/>
+                <BoxView BackgroundColor="Yellow" HeightRequest="1"/>
 
-            <Label TextColor="White" 
+                <Label TextColor="White" 
                    FontSize="Small"
                    HorizontalTextAlignment="Center"
                    Text="XXXI CURSO DE ESPECIALIZACIÓN PROGRAMAXIÓN Y DESARROLLO DE SOWFTWARE" />
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Row="1"
+            <VerticalStackLayout Grid.Row="1"
                              Padding="10">
-            <Image Source="logopnp.png" HeightRequest="250"/>
-        </VerticalStackLayout>
+                <Image Source="logopnp.png" HeightRequest="300"/>
+            </VerticalStackLayout>
 
-        <VerticalStackLayout Grid.Row="2" 
+            <VerticalStackLayout Grid.Row="2" 
                              Padding="10"
+                                 Spacing="10"                                 
                              VerticalOptions="End">
-            
-            
-            <Button Text="REPOSITORIO"
+                <CarouselView ItemsSource="{StaticResource DataCarrusel}" 
+                              IndicatorView="MiIndicador"
+                              HorizontalScrollBarVisibility="Never"
+                          HeightRequest="120">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout WidthRequest="300">
+                                <Label Text="{Binding Titulo}" 
+                                   FontFamily="OpenSansSemibold"
+                                   FontSize="Large"
+                                   HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding Descripcion}" 
+                                       MaxLines="3"
+                                       LineBreakMode="TailTruncation"
+                                   HorizontalTextAlignment="Center"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+                <IndicatorView x:Name="MiIndicador" 
+                               IndicatorSize="12"
+                               SelectedIndicatorColor="{StaticResource Primary}"
+                               HorizontalOptions="Center">
+                    
+                </IndicatorView>
+
+                <Button Text="REPOSITORIO"
                     CornerRadius="20"
                     ImageSource="github_brands_solid_white.png"
                     HeightRequest="40"
                     WidthRequest="150"/>
-        </VerticalStackLayout>
-        
-    </Grid>
-    
+            </VerticalStackLayout>
+
+        </Grid>
+    </ScrollView>
 </ContentPage>
