@@ -3,10 +3,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.CalcularIMCPage"
              Title="Calcular IMC">
-    <VerticalStackLayout>
-        <Label 
-            Text="Aquí calculadora imc"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <!--<Label Text="Calculadora de IMC"
+                   FontSize="32"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   TextColor="#333" />-->
+
+            <!-- Selector de sexo -->
+            <Label Text="Sexo" FontSize="18" TextColor="#555" />
+            <Picker x:Name="SelectorSexo"
+                    Title="Selecciona tu sexo"
+                    BackgroundColor="White"
+                    TextColor="Black">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Masculino</x:String>
+                        <x:String>Femenino</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Label x:Name="ErrorSexo" TextColor="Red" FontSize="14" IsVisible="False" />
+
+            <!-- Peso -->
+            <Label Text="Peso (kg)" FontSize="18" TextColor="#555" />
+            <Entry x:Name="EntradaPeso"
+                   Placeholder="Ej. 70"
+                   Keyboard="Numeric"
+                   BackgroundColor="White"
+                   TextColor="Black" />
+            <Label x:Name="ErrorPeso" TextColor="Red" FontSize="14" IsVisible="False" />
+
+            <!-- Altura -->
+            <Label Text="Altura (m)" FontSize="18" TextColor="#555" />
+            <Entry x:Name="EntradaAltura"
+                   Placeholder="Ej. 1.75"
+                   Keyboard="Numeric"
+                   BackgroundColor="White"
+                   TextColor="Black" />
+            <Label x:Name="ErrorAltura" TextColor="Red" FontSize="14" IsVisible="False" />
+
+            <!-- Botón de cálculo -->
+            <Button Text="Calcular IMC"
+                    Clicked="CalcularIMC"
+                    BackgroundColor="#007AFF"
+                    TextColor="White"
+                    CornerRadius="10"
+                    FontAttributes="Bold"
+                    HeightRequest="50" />
+
+            <!-- Resultado -->
+            <Frame x:Name="TarjetaResultado"
+                   IsVisible="False"
+                   Padding="20"
+                   CornerRadius="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label x:Name="EtiquetaIMC"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                    <Label x:Name="EtiquetaCategoria"
+                           FontSize="18"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                    <Label x:Name="EtiquetaInfo"
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -2,11 +2,114 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.SistemasPage"
+             BackgroundColor="#F6F7FA"
              Title="Sistemas PNP">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina sistemas PNP"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+                <Setter Property="FontFamily" Value="OpenSansSemibold"/>
+                <Setter Property="FontSize" Value="Caption"/>
+                <Setter Property="Padding" Value="5,10,5,10"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="ContentLayout" Value="Top, 5"/>
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="{StaticResource Black}"
+                                Offset="0,3"
+                                Radius="3"
+                                Opacity="0.3" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="10">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Grid.Column="0" Text="SIDPOL"  
+                    FontSize="Body"
+                    ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sidpol.jpg"
+                    ContentLayout="TOP, 20"
+                    TextColor="Black"
+                    BackgroundColor="White"/>
+
+                <Button Grid.Column="1" Text="SIRDIC"  
+                    FontSize="Body"
+                    ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sirdic.jpg"
+                    ContentLayout="TOP, 20"
+                    TextColor="Black"
+                    BackgroundColor="White" />
+
+
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                <Button Grid.Column="0" Text="SIEPOL"  
+         FontSize="Body"
+         ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/siepol.png"
+         ContentLayout="TOP, 20"
+         TextColor="Black"
+         BackgroundColor="White" />
+
+                <Button Grid.Column="1" Text="SERPOL"  
+             FontSize="Body"
+             ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/serpol.png"
+             ContentLayout="TOP, 20"
+             TextColor="Black"
+             BackgroundColor="White"/>
+
+
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                <Button Grid.Column="0" Text="CORREO"  
+   FontSize="Body"
+   ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/correo-sistemaspnp.png"
+   ContentLayout="TOP, 20"
+   TextColor="Black"
+   BackgroundColor="White" />
+
+
+                <Button Grid.Column="1" Text="SIGCP"  
+     FontSize="Body"
+     ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/SIGCP.png"
+     ContentLayout="TOP, 20"
+     TextColor="Black"
+     BackgroundColor="White" />
+            </Grid>
+
+
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+               
+
+
+                <Button Grid.Column="0" Text="MPD PNP"  
+     FontSize="Body"
+     ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/MPD.png"
+     ContentLayout="TOP, 20"
+     TextColor="Black"
+     BackgroundColor="White" />
+
+
+                <Button Grid.Column="1" Text="ESTADISTICA"  
+FontSize="Body"
+ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sistema-estadistico-policial.jpg"
+ContentLayout="TOP, 20"
+TextColor="Black"
+BackgroundColor="White" />
+                
+                
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
