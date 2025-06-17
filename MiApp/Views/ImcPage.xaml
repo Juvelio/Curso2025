@@ -28,7 +28,7 @@
                 <VerticalStackLayout Spacing="20">
                     <Label Text="¿Cual es tu nombre?" HorizontalTextAlignment="Center" FontFamily="OpenSansSemibold" FontSize="25"/>
                     <Border StrokeShape="{RoundRectangle CornerRadius=30}" HeightRequest="60" Padding="15,0">
-                        <Entry Placeholder="Ingrese su nombre" VerticalOptions="Center" FontSize="25"/>
+                        <Entry x:Name="txtNombre" Placeholder="Ingrese su nombre" VerticalOptions="Center" FontSize="25"/>
                     </Border>
                 </VerticalStackLayout>
 
