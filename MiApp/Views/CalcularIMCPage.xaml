@@ -3,10 +3,79 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.CalcularIMCPage"
              Title="Calcular IMC">
-    <VerticalStackLayout>
-        <Label 
-            Text="Aquí calculadora imc"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="200, *">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="{StaticResource Primary}" Offset="0.1"/>
+                <GradientStop Color="White" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <VerticalStackLayout Grid.Row="0"
+            VerticalOptions="Center">
+            <Label Text="Hola, xyz" 
+                   HorizontalTextAlignment="Center"
+                   FontSize="30" TextColor="White"/>
+        </VerticalStackLayout>
+
+        <Border Grid.Row="1" 
+                StrokeShape="{RoundRectangle CornerRadius='40,40,0,0'}"
+                BackgroundColor="White">
+
+            <VerticalStackLayout WidthRequest="300" Margin="30,50" Spacing="30">
+
+                <VerticalStackLayout>
+                    <Label Text="Talla :" FontSize="20" FontAttributes="Bold"/>
+                    <Border StrokeShape="{RoundRectangle CornerRadius='12'}" Padding="10,0">
+                        <Entry x:Name="txtTalla"
+                            Keyboard="Numeric" Placeholder="Ingrese su talla" FontSize="20"/>
+                    </Border>
+
+                    <Label x:Name="ErrorTalla" TextColor="Red" IsVisible="False"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Peso :" FontSize="20" FontAttributes="Bold"/>
+                    <Border StrokeShape="{RoundRectangle CornerRadius='12'}" Padding="10,0">
+                        <Entry x:Name="txtPeso"
+                            Keyboard="Numeric" Placeholder="Ingrese su peso" FontSize="20"/>
+                    </Border>
+                    <Label x:Name="ErrorPeso" TextColor="Red" IsVisible="False"/>
+                </VerticalStackLayout>
+
+                <Button x:Name="btnCalcular" Text="Calcular" 
+                        Clicked="btnCalcular_Clicked"/>
+
+
+                <!--resultado-->
+                <Border x:Name="TarjetaResultado"
+                        IsVisible="False"
+                        Padding="20">
+
+                    <VerticalStackLayout>
+                        <Label x:Name="EtiquetaIMC"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+
+                        <Label x:Name="EtiquetaCategoria"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+
+                        <Label x:Name="EtiquetaInfo"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                    
+                </Border>
+                
+
+            </VerticalStackLayout>
+
+        </Border>
+
+
+    </Grid>
 </ContentPage>
