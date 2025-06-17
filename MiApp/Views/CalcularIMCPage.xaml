@@ -19,6 +19,7 @@
         </VerticalStackLayout>
 
         <Border Grid.Row="1" 
+                Stroke="Transparent"
                 StrokeShape="{RoundRectangle CornerRadius='40,40,0,0'}"
                 BackgroundColor="White">
 

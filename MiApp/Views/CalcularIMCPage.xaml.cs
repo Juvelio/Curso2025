@@ -62,14 +62,26 @@ public partial class CalcularIMCPage : ContentPage
             return "Obesidad";
     }
 
+    //private Color ObtenerColorCategoriaIMC(string categoria)
+    //{
+    //    return categoria switch
+    //    {
+    //        "Bajo peso" => Colors.Blue,
+    //        "Peso normal" => Colors.Green,
+    //        "Sobrepeso" => Colors.Yellow,
+    //        "Obesidad" => Colors.Red,
+    //        _ => Colors.Gray
+    //    };
+    //}
+
     private Color ObtenerColorCategoriaIMC(string categoria)
     {
         return categoria switch
         {
-            "Bajo peso" => Colors.Blue,
-            "Peso normal" => Colors.Green,
-            "Sobrepeso" => Colors.Yellow,
-            "Obesidad" => Colors.Red,
+            "Bajo peso" => Color.FromArgb("#FFA726"),     // Naranja
+            "Normal" => Color.FromArgb("#66BB6A"),        // Verde
+            "Sobrepeso" => Color.FromArgb("#FFCA28"),     // Amarillo
+            "Obesidad" => Color.FromArgb("#EF5350"),      // Rojo
             _ => Colors.Gray
         };
     }

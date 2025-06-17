@@ -2,11 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.SistemasPage"
+             BackgroundColor="#F6F7FA"
              Title="Sistemas PNP">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina sistemas PNP"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="estilobtn" TargetType="Button">
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Padding" Value="5,10,5,10"/>
+                <Setter Property="ContentLayout" Value="top, 20"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontFamily" Value="OpenSansSemiBold"/>
+                <Setter Property="FontSize" Value="Body"/>
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="Gray"
+                                Offset="0,3"
+                                Radius="3"
+                                Opacity="0.3"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="10">
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button Grid.Column="0"   
+                    Style="{StaticResource estilobtn}"
+                    ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sidpol.jpg"
+                Text="SIDPOL"/>
+
+            <Button Grid.Column="1"
+                   Style="{StaticResource estilobtn}"
+                    ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sirdic.jpg"                      
+                    Text="SIRDIC"/>
+        </Grid>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button Grid.Column="0"   
+              Style="{StaticResource estilobtn}"
+              ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sidpol.jpg"
+          Text="SIDPOL"/>
+
+            <Button Grid.Column="1"
+             Style="{StaticResource estilobtn}"
+              ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/sirdic.jpg"                      
+              Text="SIRDIC"/>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

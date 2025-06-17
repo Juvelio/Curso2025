@@ -20,7 +20,9 @@
                    HorizontalTextAlignment="Center"/>
         </VerticalStackLayout>
 
-        <Border Grid.Row="1" BackgroundColor="White" Padding="10,20" 
+        <Border Grid.Row="1" 
+                Stroke="Transparent"
+                BackgroundColor="White" Padding="10,20" 
                 StrokeShape="{RoundRectangle CornerRadius='60,60,0,0'}">
 
             <FlexLayout Direction="Column" JustifyContent="SpaceBetween"  WidthRequest="300">
