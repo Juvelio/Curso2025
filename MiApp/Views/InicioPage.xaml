@@ -22,29 +22,24 @@
 
     <ContentPage.Resources>
         <x:Array x:Key="DataCarrusel" Type="{x:Type Models:CarouselItem}">
-            <Models:CarouselItem Titulo="Web APIs RESTfull con ASP .NET"
-                                 Descripcion="Admite la virtualización de datos incremental a medida que se desplaza el usuario. Esto permite escenarios como cargar de forma asincrónica una página de datos desde un servicio web, a medida que el usuario se desplaza."/>
-
-            <Models:CarouselItem Titulo=".NET Multi-Platform App UI"
-                                 Descripcion="Compile aplicaciones móviles y de escritorio nativas multiplataforma en un solo marco."/>
-
-            <Models:CarouselItem Titulo="Crear. Probar. Implementar."
-                                 Descripcion=".NET es el marco multiplataforma gratuito de código abierto para compilar aplicaciones modernas y servicios eficaces en la nube."/>
+            <Models:CarouselItem Titulo="Web APIs RESTful con ASP.NET" Descripcion="Los Web APIs son fundamentales en el desarrollo web moderno. Ya que nos permiten centralizar y proteger la lógica de nuestras soluciones." />
+            <Models:CarouselItem Titulo=".NET Multi-platform App UI" Descripcion=".NET MAUI, es el potente framework de Microsoft para crear aplicaciones multiplataforma, es decir, aplicaciones para Android, iOS, Windows y MacOS, creando el código una sola vez, y pudiendo desplegarlo en múltiples plataformas." />
+            <Models:CarouselItem Titulo="Y mucho mas ..." Descripcion="Mis especialidades incluyen Desarrollo Web, ASP.NET Core y MVC, Entity Framework Core, SQL Server, Javascript, Angular, WPF, Desarrollo Móvil Android y Xamarin. Soy un programador apasionado al que le encanta resolver problemas y automatizar tareas." />
         </x:Array>
     </ContentPage.Resources>
 
     <ScrollView>
 
-        <Grid RowDefinitions="auto,*,*">
+        <Grid RowDefinitions="auto,*,auto">
 
             <VerticalStackLayout Grid.Row="0"
             Spacing="10"
             Padding="10,10,10,0"
             BackgroundColor="{StaticResource Primary}">
 
-                <Grid ColumnDefinitions="auto, *, auto">
+                <Grid ColumnDefinitions="auto, *, auto" ColumnSpacing="5">
                     <Image Grid.Column="0" Source="logopnp.png" 
-                       WidthRequest="60"/>
+                       WidthRequest="50"/>
 
                     <Label Grid.Column="1" 
                        FontFamily="OpenSansSemibold"
@@ -55,17 +50,17 @@
                        Text="POLICÍA NACIONAL DEL PERÚ"/>
 
                     <Image Grid.Column="2" Source="logouniins.png" 
-                       WidthRequest="60"/>
+                       WidthRequest="50"/>
                 </Grid>
 
-                <BoxView BackgroundColor="#ba9e66" HeightRequest="1" Margin="-10,0,-10,0"/>
+                <BoxView BackgroundColor="#ba9e66" HeightRequest="2" Margin="-10,0,-10,0"/>
 
                 <Label TextColor="White" 
                    FontSize="Small"
                    HorizontalTextAlignment="Center"
                    Text="XXXI CURSO DE ESPECIALIZACIÓN PROGRAMAXIÓN Y DESARROLLO DE SOWFTWARE" />
 
-                <BoxView BackgroundColor="#ba9e66" HeightRequest="2" Margin="-10,0,-10,0"/>
+                <BoxView BackgroundColor="#ba9e66" HeightRequest="4" Margin="-10,0,-10,0"/>
 
             </VerticalStackLayout>
 
@@ -74,7 +69,7 @@
                              Padding="10">
                 <!--<Image Source="logopnp.png" HeightRequest="300"/>-->
 
-                <skia:SKLottieView Source="mimaui.json"
+                <skia:SKLottieView Source="mimaui.json"                                   
                                    RepeatCount="-1"
                                    HeightRequest="250"/>
 
@@ -83,21 +78,22 @@
 
             <VerticalStackLayout Grid.Row="2" 
                              Padding="10,10,10,30"
-                                 Spacing="10"                                 
+                                 Spacing="20"                                 
                              VerticalOptions="End">
                 <CarouselView ItemsSource="{StaticResource DataCarrusel}" 
                               IndicatorView="MiIndicador"
                               HorizontalScrollBarVisibility="Never"
-                          HeightRequest="120">
+                              HeightRequest="120">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <VerticalStackLayout WidthRequest="300">
                                 <Label Text="{Binding Titulo}" 
                                    FontFamily="OpenSansSemibold"
-                                   FontSize="Large"
+                                   FontSize="20"
                                    HorizontalTextAlignment="Center"/>
                                 <Label Text="{Binding Descripcion}" 
-                                       MaxLines="3"
+                                       FontSize="15"
+                                       MaxLines="4"
                                        LineBreakMode="TailTruncation"
                                    HorizontalTextAlignment="Center"/>
                             </VerticalStackLayout>
@@ -117,7 +113,7 @@
                         Clicked="btnRepositorio_Clicked"
                     ImageSource="github_brands_solid_white.png"
                     HeightRequest="40"
-                    WidthRequest="150"/>
+                    WidthRequest="170"/>
             </VerticalStackLayout>
 
         </Grid>

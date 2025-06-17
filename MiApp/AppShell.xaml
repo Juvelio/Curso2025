@@ -14,6 +14,8 @@
     Shell.TabBarForegroundColor="White"
     
     Shell.TabBarUnselectedColor="#95FFFFFF"
+    
+    Shell.NavBarHasShadow="True"
     Title="MiApp">
     
 
@@ -57,23 +59,28 @@
     <TabBar>
         <ShellContent Title="Inicio"                      
                       Icon="house_solid.png"
-                      ContentTemplate="{DataTemplate local:InicioPage}" />
-        
+                      ContentTemplate="{DataTemplate local:InicioPage}" 
+                      Route="InicioPage"/>
+
         <ShellContent Title="IMC"                         
                       Icon="heart_pulse_solid.png"                         
-                      ContentTemplate="{DataTemplate local:ImcPage}" />
+                      ContentTemplate="{DataTemplate local:ImcPage}" 
+                      Route="ImcPage"/>
 
-        <ShellContent Title="Sistemas"                 
-                      Icon="calculator_solid.png"                 
-                      ContentTemplate="{DataTemplate local:SistemasPage}" />
+        <ShellContent Title="Sistemas"                         
+                      Icon="layer_group_solid.png"                         
+                      ContentTemplate="{DataTemplate local:SistemasPage}" 
+                      Route="SistemasPage"/>        
 
         <ShellContent Title="Ciudadanos"                 
-                      Icon="cloud_sun_rain_solid.png"                 
-                      ContentTemplate="{DataTemplate local:CiudadanosPage}" />
+                      Icon="user_group_solid.png"                 
+                      ContentTemplate="{DataTemplate local:CiudadanosPage}" 
+                      Route="CiudadanosPage"/>
 
         <ShellContent Title="Controles"                     
                       Icon="gear_solid.png"                      
-                      ContentTemplate="{DataTemplate local:ControlesPage}" />
-    </TabBar>  
+                      ContentTemplate="{DataTemplate local:ControlesPage}" 
+                      Route="ControlesPage"/>
+    </TabBar> 
 
 </Shell>
