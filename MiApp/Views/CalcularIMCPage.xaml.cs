@@ -6,7 +6,7 @@ public partial class CalcularIMCPage : ContentPage
     {
         InitializeComponent();
 
-       var Nombre =  Preferences.Get("MiNombre","");
+        var Nombre = Preferences.Get("MiNombre", "");
         lblNombre.Text = $"Hola, {Nombre}";
     }
 
@@ -76,13 +76,40 @@ public partial class CalcularIMCPage : ContentPage
 
     private Color ObtenerColorCategoriaIMC(string categoria)
     {
-        return categoria switch
+        #region Simplificado con switch expression (C# 8.0+)
+        //return categoria switch
+        //{
+        //    "Bajo peso" => Color.FromArgb("#FFA726"),     // Naranja
+        //    "Normal" => Color.FromArgb("#66BB6A"),        // Verde
+        //    "Sobrepeso" => Color.FromArgb("#FFCA28"),     // Amarillo
+        //    "Obesidad" => Color.FromArgb("#EF5350"),      // Rojo
+        //    _ => Colors.Gray
+        //};
+        #endregion
+
+        var color = Colors.Gray; // Color por defecto
+        switch (categoria)
         {
-            "Bajo peso" => Color.FromArgb("#FFA726"),     // Naranja
-            "Normal" => Color.FromArgb("#66BB6A"),        // Verde
-            "Sobrepeso" => Color.FromArgb("#FFCA28"),     // Amarillo
-            "Obesidad" => Color.FromArgb("#EF5350"),      // Rojo
-            _ => Colors.Gray
-        };
+            case "Bajo peso":
+                color = Color.FromArgb("#FFA726"); // Naranja
+                break;
+
+            case "Peso normal":
+                color = Color.FromArgb("#66BB6A"); // Verde
+                break;
+            case
+                "Sobrepeso":
+                color = Color.FromArgb("#FFCA28"); // Amarillo
+                break;
+            case
+                "Obesidad":
+                color = Color.FromArgb("#EF5350"); // Rojo
+                break;
+            default:
+                color = Colors.Gray; // Color por defecto
+                break;
+        }
+
+        return color;
     }
 }

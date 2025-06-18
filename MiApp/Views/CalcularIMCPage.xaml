@@ -3,80 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.CalcularIMCPage"
              Title="Calcular IMC">
-    <Grid RowDefinitions="200, *">
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                <GradientStop Color="{StaticResource Primary}" Offset="0.1"/>
-                <GradientStop Color="White" Offset="1.0"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <ScrollView VerticalScrollBarVisibility="Never">
+        <Grid RowDefinitions="120, *">
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="{StaticResource Primary}" Offset="0.1"/>
+                    <GradientStop Color="White" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Grid.Background>
 
-        <VerticalStackLayout Grid.Row="0"
+            <VerticalStackLayout Grid.Row="0"
             VerticalOptions="Center">
-            <Label x:Name="lblNombre" Text="Hola, xyz" 
+                <Label x:Name="lblNombre" Text="Hola, xyz" 
                    HorizontalTextAlignment="Center"
                    FontSize="30" TextColor="White"/>
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <Border Grid.Row="1" 
+            <Border Grid.Row="1" 
                 Stroke="Transparent"
                 StrokeShape="{RoundRectangle CornerRadius='40,40,0,0'}"
                 BackgroundColor="White">
 
-            <VerticalStackLayout WidthRequest="300" Margin="30,50" Spacing="30">
-
-                <VerticalStackLayout>
-                    <Label Text="Talla :" FontSize="20" FontAttributes="Bold"/>
-                    <Border StrokeShape="{RoundRectangle CornerRadius='12'}" Padding="10,0">
-                        <Entry x:Name="txtTalla"
-                            Keyboard="Numeric" Placeholder="Ingrese su talla" FontSize="20"/>
-                    </Border>
-
-                    <Label x:Name="ErrorTalla" TextColor="Red" IsVisible="False"/>
-                </VerticalStackLayout>
-
-                <VerticalStackLayout>
-                    <Label Text="Peso :" FontSize="20" FontAttributes="Bold"/>
-                    <Border StrokeShape="{RoundRectangle CornerRadius='12'}" Padding="10,0">
-                        <Entry x:Name="txtPeso"
-                            Keyboard="Numeric" Placeholder="Ingrese su peso" FontSize="20"/>
-                    </Border>
-                    <Label x:Name="ErrorPeso" TextColor="Red" IsVisible="False"/>
-                </VerticalStackLayout>
-
-                <Button x:Name="btnCalcular" Text="Calcular" 
-                        Clicked="btnCalcular_Clicked"/>
+                <VerticalStackLayout WidthRequest="300" Margin="0,50,0,0" Spacing="30">
 
 
-                <!--resultado-->
-                <Border x:Name="TarjetaResultado"
-                        IsVisible="False"
-                        Padding="20">
 
                     <VerticalStackLayout>
-                        <Label x:Name="EtiquetaIMC"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
+                        <Label Text="Talla :" FontSize="20" FontAttributes="Bold"/>
+                        <Border StrokeShape="{RoundRectangle CornerRadius='12'}" Padding="10,0">
+                            <Entry x:Name="txtTalla"
+                            Keyboard="Numeric" Placeholder="Ingrese su talla" FontSize="20"/>
+                        </Border>
 
-                        <Label x:Name="EtiquetaCategoria"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-
-                        <Label x:Name="EtiquetaInfo"
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
+                        <Label x:Name="ErrorTalla" TextColor="Red" IsVisible="False"/>
                     </VerticalStackLayout>
-                    
-                </Border>
-                
 
-            </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Peso :" FontSize="20" FontAttributes="Bold"/>
+                        <Border StrokeShape="{RoundRectangle CornerRadius='12'}" Padding="10,0">
+                            <Entry x:Name="txtPeso"
+                            Keyboard="Numeric" Placeholder="Ingrese su peso" FontSize="20"/>
+                        </Border>
+                        <Label x:Name="ErrorPeso" TextColor="Red" IsVisible="False"/>
+                    </VerticalStackLayout>
 
-        </Border>
+                    <Button x:Name="btnCalcular" Text="Calcular" 
+                        Clicked="btnCalcular_Clicked"/>
+
+                    <!--resultado-->
+                    <Border x:Name="TarjetaResultado"
+                        IsVisible="False"
+                        StrokeShape="{RoundRectangle CornerRadius='20'}"
+                        Stroke="Transparent"
+                        Padding="20">
+
+                        <VerticalStackLayout>
+                            <Label x:Name="EtiquetaIMC"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center"/>
+
+                            <Label x:Name="EtiquetaCategoria"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center"/>
+
+                            <Label x:Name="EtiquetaInfo"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                    </Border>
 
 
-    </Grid>
+                </VerticalStackLayout>
+
+            </Border>
+
+
+        </Grid>
+    </ScrollView>
 </ContentPage>

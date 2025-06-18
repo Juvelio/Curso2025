@@ -62,13 +62,13 @@
                         Clicked="Sistema_Clicked"
                     Style="{StaticResource estilobtn}"
                     ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/correo-sistemaspnp.png"
-                    Text="CORREO"/>
+                    Text="CORREO PNP"/>
 
                 <Button Grid.Column="1"
                         Clicked="Sistema_Clicked"
                     Style="{StaticResource estilobtn}"
                     ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/SIGCP.png"            
-                    Text="sigcp"/>
+                    Text="SIGCP"/>
             </Grid>
 
             <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
@@ -80,11 +80,12 @@
 
                 <Button Grid.Column="1"
             Style="{StaticResource estilobtn}"
+                        Clicked="Sistema_Clicked"
             ImageSource="https://www.policia.gob.pe/sistemaspnp/img_external/gallery/licencia-conducir.jpg"            
             Text="LICENCIAS"/>
             </Grid>
 
         </VerticalStackLayout>
     </ScrollView>
-    
+
 </ContentPage>
