@@ -26,7 +26,6 @@ namespace Servicio.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(8)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
@@ -35,6 +34,7 @@ namespace Servicio.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -57,6 +57,7 @@ namespace Servicio.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Telefono")
+                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 

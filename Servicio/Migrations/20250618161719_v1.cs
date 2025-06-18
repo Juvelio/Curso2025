@@ -55,10 +55,10 @@ namespace Servicio.Migrations
                 name: "Ciudadanos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", maxLength: 8, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
-                    Direccion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Telefono = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     GeneroId = table.Column<int>(type: "int", nullable: false),
                     DNI = table.Column<int>(type: "int", nullable: false),
                     Paterno = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),

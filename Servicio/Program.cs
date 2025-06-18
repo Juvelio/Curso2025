@@ -36,11 +36,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("Cors", policy =>
     {
-        policy.WithOrigins("https://miapp.com", "http://localhost:4200", "https://localhost:7153") // ? Dominios permitidos
+        policy.WithOrigins("https://localhost:7153", 
+            "https://curso2025-001-site1.anytempurl.com", 
+            "https://calm-cliff-06a2d340f.6.azurestaticapps.net") // ? Dominios permitidos
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
+
+
 
 
 // Registrar controladores de la API
@@ -56,11 +60,18 @@ var app = builder.Build();
 
 
 // Habilitar middleware de Swagger para generar y mostrar la documentación de la API
-app.UseSwagger(); 
+app.UseSwagger();
 app.UseSwaggerUI();
 
 // Habilitar CORS sin restricciones
 app.UseCors("Cors");
+//app.UseCors(config =>
+//{
+//    config.AllowAnyOrigin();
+//    config.AllowAnyMethod();
+//    config.AllowAnyHeader();
+//    config.WithExposedHeaders("*");
+//});
 
 // Habilitar autenticación y autorización
 app.UseAuthentication();

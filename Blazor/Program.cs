@@ -11,7 +11,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri("https://localhost:7057/") // URL de tu API
+    //BaseAddress = new Uri("https://localhost:7057/") // URL de tu API
+    BaseAddress = new Uri("https://curso2025-001-site1.anytempurl.com/") // URL de tu API
 });
 builder.Services.AddScoped<CiudadanoService>();
 builder.Services.AddScoped<GeneroService>();
