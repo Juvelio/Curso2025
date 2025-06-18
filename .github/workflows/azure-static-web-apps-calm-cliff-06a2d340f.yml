@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'Blazor/**'  # Solo se activa si hay cambios en la carpeta Blazor
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
