@@ -3,8 +3,7 @@ using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MiApp
-{
-    public static class MauiProgram
+{    public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()
         {
