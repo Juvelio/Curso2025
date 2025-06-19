@@ -1,4 +1,7 @@
-﻿using MiApp.Views;
+﻿using CommunityToolkit.Maui;
+using MiApp.Services;
+using MiApp.ViewModels;
+using MiApp.Views;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -10,6 +13,7 @@ namespace MiApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
@@ -21,6 +25,15 @@ namespace MiApp
             Routing.RegisterRoute(nameof(CalcularIMCPage),
                 typeof(CalcularIMCPage));
 
+            builder.Services.AddScoped(sp => new HttpClient
+            {
+                BaseAddress = new Uri("https://curso2025-001-site1.anytempurl.com/") // URL de tu API
+            });
+            builder.Services.AddScoped<CiudadanoService>();
+            builder.Services.AddScoped<GeneroService>();
+
+            builder.Services.AddScoped<CiudadanosPage>();
+            builder.Services.AddScoped<CiudadanosViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
