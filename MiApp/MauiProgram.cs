@@ -34,6 +34,11 @@ namespace MiApp
 
             builder.Services.AddScoped<CiudadanosPage>();
             builder.Services.AddScoped<CiudadanosViewModel>();
+
+            builder.Services.AddSingleton<CiudadanosPage>();
+            builder.Services.AddSingleton<CiudadanosViewModel>();
+
+            builder.Services.AddTransientWithShellRoute<CiudadanoPage, CiudadanoViewModel>(nameof(CiudadanoPage));
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

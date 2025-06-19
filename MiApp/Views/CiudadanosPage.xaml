@@ -2,11 +2,74 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiApp.Views.CiudadanosPage"
+             
+             xmlns:models="clr-namespace:Entidades.Models;assembly=Entidades"
+             xmlns:viewModels="clr-namespace:MiApp.ViewModels"
+             
              Title="Ciudadanos">
-    <VerticalStackLayout>
-        <Label 
-            Text="Pagina inicio"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    
+
+    <Grid>
+
+        <ActivityIndicator HeightRequest="30" WidthRequest="30" IsRunning="True" IsVisible="{Binding IsBusy}"/>
+
+        <ScrollView>
+            <CollectionView
+                ItemsSource="{Binding Ciudadanos}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Ciudadano">
+                        <Border Margin="10" StrokeShape="{RoundRectangle CornerRadius=15}">
+                            <VerticalStackLayout Padding="10">
+                                <Label Text="{Binding DNI}" FontSize="24" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Paterno}"/>
+                                            <Span Text=" " />
+                                            <Span Text="{Binding Materno}"/>
+                                            <Span Text=", " />
+                                            <Span Text="{Binding Nombres}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                
+                                
+                                <Label Text="{Binding Genero.Descripcion}" />
+
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Direccion}" />
+                                    <Label Text=" - Telefono: "  FontAttributes="Bold"/>
+                                    <Label Text="{Binding Telefono}" />
+                                </HorizontalStackLayout>                               
+
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavegarCiudadanoCommand, 
+                                    Source={RelativeSource AncestorType={x:Type viewModels:CiudadanosViewModel}},
+                                    x:DataType=viewModels:CiudadanosViewModel}" CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <!--<controls:AddButton 
+        Command="{Binding AddProjectCommand}" />-->
+
+        <Button Text="+"
+    ImageSource="{StaticResource IconAdd}" 
+    BackgroundColor="{StaticResource Primary}" 
+                Command="{Binding AgregarCiudadanoCommand}"
+    CornerRadius="30" 
+                FontSize="35" 
+                Padding="0"
+    HeightRequest="60" 
+    WidthRequest="60" 
+    VerticalOptions="End" 
+    HorizontalOptions="End"
+    Margin="30" 
+    SemanticProperties.Description="Add" />
+    </Grid>
 </ContentPage>

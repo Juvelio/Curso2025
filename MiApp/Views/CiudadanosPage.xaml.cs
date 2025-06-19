@@ -4,9 +4,17 @@ namespace MiApp.Views;
 
 public partial class CiudadanosPage : ContentPage
 {
-	public CiudadanosPage(CiudadanosViewModel viewModel)
+    private CiudadanosViewModel _viewModel;
+
+    public CiudadanosPage(CiudadanosViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
+		BindingContext = _viewModel = viewModel;
+    }
+
+    protected override  void OnAppearing()
+    {
+        base.OnAppearing();
+        _viewModel.OnAppearing();
     }
 }

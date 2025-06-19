@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiApp.Views.CiudadanoPage"
+             Title="CiudadanoPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding EliminarCommand}" 
+                     Text="Eliminar">
+
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Border>
+            <Entry  Text="{Binding Ciudadano.DNI}" Placeholder="DNI"/>
+        </Border>
+        <Border>
+            <Entry  Text="{Binding Ciudadano.Paterno}" Placeholder="Paterno"/>
+        </Border>
+        <Border>
+            <Entry  Text="{Binding Ciudadano.Materno}" Placeholder="Materno"/>
+        </Border>
+        <Border>
+            <Entry  Text="{Binding Ciudadano.Nombres}" Placeholder="Nombres"/>
+        </Border>
+        <Border>
+            <Entry  Text="{Binding Ciudadano.Telefono}" Placeholder="Telefono"/>
+        </Border>
+
+        <Border>
+            <Entry  Text="{Binding Ciudadano.Direccion}" Placeholder="Dirreccion"/>
+        </Border>
+
+        <Picker 
+            Title="Selecciona un género"
+            ItemsSource="{Binding Generos}"
+            SelectedIndex="{Binding SelectedIndex}"
+            ItemDisplayBinding="{Binding Descripcion}" />
+
+        <Button Text="Guardar" Command="{Binding GuardarCommand}"/>
+        <Button Text="Cancelar" Command="{Binding CancelarCommand}" BackgroundColor="{StaticResource Gray300}"/>
+
+
+    </VerticalStackLayout>
+</ContentPage>
