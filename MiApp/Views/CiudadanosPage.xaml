@@ -59,7 +59,6 @@
         Command="{Binding AddProjectCommand}" />-->
 
         <Button Text="+"
-    ImageSource="{StaticResource IconAdd}" 
     BackgroundColor="{StaticResource Primary}" 
                 Command="{Binding AgregarCiudadanoCommand}"
     CornerRadius="30" 

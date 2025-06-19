@@ -44,57 +44,57 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-android|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-ios|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-maccatalyst|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net9.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-android|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-ios|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-maccatalyst|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net9.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>Mi Curso</ApplicationTitle>
 	  <ApplicationId>pe.gob.policia.micurso</ApplicationId>
-	  <ApplicationDisplayVersion>1.0.3</ApplicationDisplayVersion>
-	  <ApplicationVersion>3</ApplicationVersion>
+	  <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+	  <ApplicationVersion>4</ApplicationVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
